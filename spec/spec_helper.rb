@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
 
-require 'pry'
 require 'rspec'
 
 require File.expand_path('../../lib/mongoid_slug', __FILE__)
