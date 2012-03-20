@@ -97,7 +97,7 @@ module Mongoid
         # Build a finder for slug.
         #
         # Defaults to `find_by_slug`.
-        instance_eval <<-CODE
+        instance_eval <<-CODE, __FILE__, __LINE__ + 1
           def self.find_by_#{slug_name}(slug)
             if slug_history_name
               any_of({ slug_name => slug }, { slug_history_name => slug })
