@@ -49,7 +49,7 @@ To scope a slug by a reference association, pass `:scope`:
 class Company
   include Mongoid::Document
   
-  references_many :employees
+  has_many :employees
 end
 
 class Employee
@@ -57,7 +57,7 @@ class Employee
   include Mongoid::Slug
   
   field :name
-  referenced_in :company
+  belongs_to :company
   
   slug  :name, :scope => :company
 end

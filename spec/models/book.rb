@@ -4,7 +4,7 @@ class Book
   field :title
   slug  :title, :index => true, :history => true
   embeds_many :subjects
-  references_many :authors
+  has_many :authors
 end
 
 class ComicBook < Book
