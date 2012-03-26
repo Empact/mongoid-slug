@@ -108,7 +108,7 @@ module Mongoid
 
           def self.find_by_#{slug_name}!(slug)
             find_by_#{slug_name}(slug) ||
-              raise(Mongoid::Errors::DocumentNotFound.new self, slug)
+              raise(Mongoid::Errors::DocumentNotFound.new self, slug, slug)
           end
         CODE
 
