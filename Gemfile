@@ -1,4 +1,4 @@
 source :rubygems
 gemspec
 
-gem "mongoid", git: 'https://github.com/mongoid/mongoid.git'
+gem "mongoid", git: 'https://github.com/Empact/mongoid.git'
