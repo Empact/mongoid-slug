@@ -652,7 +652,7 @@ module Mongoid
             book.save!
             book2.title = "other title"
             book2.save!
-            Book.find([book.slug, "difference-and-repetition"]).should = [book, book2]
+            Book.find([book.slug, "difference-and-repetition"]).should =~ [book, book2]
           end
           it "returns the documents by their present slugs when using histories" do
             Book.find([book.slug, book2.slug]).should == [book, book2]

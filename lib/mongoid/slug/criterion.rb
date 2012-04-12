@@ -1,7 +1,13 @@
 module Mongoid::Slug::Criterion
+  extend ActiveSupport::Concern
+
+  included do
+    alias_method_chain :for_ids, :slug
+  end
+
   # Override Mongoid's finder to use slug or id
-  def for_ids(*ids)
-    return super unless @klass.ancestors.include?(Mongoid::Slug)
+  def for_ids_with_slug(ids)
+    return for_ids_without_slug(ids) unless @klass.ancestors.include?(Mongoid::Slug)
 
     # We definitely don't want to rescue at the same level we call super above -
     # that would risk applying our slug behavior to non-slug objects, in the case
@@ -11,7 +17,7 @@ module Mongoid::Slug::Criterion
       # resembles a BSON::ObjectId
       ids.flatten!
       BSON::ObjectId.from_string(ids.first) unless ids.first.is_a?(BSON::ObjectId)
-      super # Fallback to original Mongoid::Criterion::Optional
+      for_ids_without_slug(ids) # Fallback to original Mongoid::Criterion::Optional
     rescue BSON::InvalidObjectId
       # slug
       if ids.size > 1
