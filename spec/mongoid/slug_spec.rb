@@ -423,7 +423,7 @@ module Mongoid
 
     context "when #slug is given a block" do
       let(:caption) do
-        Caption.create(:identity => "Edward Hopper (American, 1882-1967)",
+        Caption.create(:details => "Edward Hopper (American, 1882-1967)",
                        :title    => "Soir Bleu, 1914",
                        :medium   => "Oil on Canvas")
       end
@@ -439,7 +439,7 @@ module Mongoid
       end
 
       it "does not change slug if slugged fields have changed but generated slug is identical" do
-        caption.identity = "Edward Hopper"
+        caption.details = "Edward Hopper"
         caption.save
         caption.to_param.should eql "edward-hopper-soir-bleu-1914"
       end
@@ -652,7 +652,7 @@ module Mongoid
             book.save!
             book2.title = "other title"
             book2.save!
-            Book.find([book.slug, "difference-and-repetition"]).should == [book, book2]
+            Book.find([book.slug, "difference-and-repetition"]).should = [book, book2]
           end
           it "returns the documents by their present slugs when using histories" do
             Book.find([book.slug, book2.slug]).should == [book, book2]
